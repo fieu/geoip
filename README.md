@@ -22,7 +22,7 @@ The code is poor, and I'm using ipinfo.io to grab the geographical IP address in
 * You need to have the `js` interpreter installed like [SpiderMonkey](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey).
 
 ## Install
-* `sudo bash -c 'curl -L https://raw.githubusercontent.com/NurdTurd/geoip/master/geoip.sh -o /usr/local/bin/geoip && chmod +x /usr/local/bin/geoip'`
+* `sudo bash -c 'curl -L https://raw.githubusercontent.com/NurdTurd/geoip/master/geoip -o /usr/local/bin/geoip && chmod +x /usr/local/bin/geoip'`
 
 ## Usage
 ```text
