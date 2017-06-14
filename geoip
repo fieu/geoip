@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# Application Name: geoip
+# Description: Receive information based on the IP you provide on the command-line.
+# Author('s): Sheldon Rupp (https://shel.io)
+# Last time edited: Wednesday June 14, 2017 – 1:17 PM
+
+# Copyright (c) 2016 Sheldon Rupp, me@shel.io
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# Source SHML
+source $(which shml)
+
+# Define Usage
+usage="$(basename "$0") [-h] [IP] -- Get GeoIP information on the command-line.
+
+options:
+    -h  show this help text"
+# Check options
+while getopts ':h:' option; do
+  case "$option" in
+    h) echo "$usage"
+       exit
+       ;;
+  esac
+done
+
+# Spit out usage if supplied nothing
+if [ $# -eq 0 ]
+	then
+    echo "$usage"
+	else
+		curl -s http://ipinfo.io/$1 > /tmp/ip_info_temp
+		r_ip=$(cat /tmp/ip_info_temp | jsawk 'return this.ip')
+		r_hostname=$(cat /tmp/ip_info_temp | jsawk 'return this.hostname')
+		r_city=$(cat /tmp/ip_info_temp | jsawk 'return this.city')
+		r_region=$(cat /tmp/ip_info_temp | jsawk 'return this.region')
+		r_country=$(cat /tmp/ip_info_temp | jsawk 'return this.country')
+		r_loc=$(cat /tmp/ip_info_temp | jsawk 'return this.loc')
+		r_org=$(cat /tmp/ip_info_temp | jsawk 'return this.org')
+
+		echo $(fgcolor white "IP: ")$(fgcolor end)$(fgcolor yellow "$r_ip")$(fgcolor end)
+		echo $(fgcolor white "Hostname: ")$(fgcolor end)$(fgcolor yellow "$r_hostname")$(fgcolor end)
+		echo $(fgcolor white "City: ")$(fgcolor end)$(fgcolor yellow "$r_city")$(fgcolor end)
+		echo $(fgcolor white "Region: ")$(fgcolor end)$(fgcolor yellow "$r_region")$(fgcolor end)
+		echo $(fgcolor white "Country: ")$(fgcolor end)$(fgcolor yellow "$r_country")$(fgcolor end)
+		echo $(fgcolor white "Coordinates: ")$(fgcolor end)$(fgcolor yellow "$r_loc")$(fgcolor end)
+		echo $(fgcolor white "Organization: ")$(fgcolor end)$(fgcolor yellow "$r_org")$(fgcolor end)
+		rm -Rf /tmp/ip_info_temp
+fi
