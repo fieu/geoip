@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/NurdTurd/geoip"><img src="https://i.imgur.com/0IwBubm.png" alt="WebTorrent" width="200"></a>
+  <a href="https://github.com/fieu/geoip"><img src="https://i.imgur.com/0IwBubm.png" width="200"></a>
   <br>
   geoip
   <br>
@@ -22,7 +22,7 @@ The code is poor, and I'm using ipinfo.io to grab the geographical IP address in
 * You need to have the `js` interpreter installed like [SpiderMonkey](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey).
 
 ## Install
-* `sudo bash -c 'curl -L https://raw.githubusercontent.com/NurdTurd/geoip/master/geoip -o /usr/local/bin/geoip && chmod +x /usr/local/bin/geoip'`
+* `sudo bash -c 'curl -L https://raw.githubusercontent.com/fieu/geoip/master/geoip -o /usr/local/bin/geoip && chmod +x /usr/local/bin/geoip'`
 
 ## Usage
 ```text
